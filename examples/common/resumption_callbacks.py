@@ -2,11 +2,7 @@ from composer.core import Callback, State
 from composer.loggers import Logger
 from typing import List
 
-__all__ = [
-    'GlobalLRScaling',
-    'LayerFreezing',
-]
-
+__all__ = ['GlobalLRScaling', 'LayerFreezing',]
 
 class GlobalLRScaling(Callback):
     """This callback can be applied upon resuming a model checkpoint. Upon fit_start it will multiply the base LR by `lr_scale` and set the WD to be 
@@ -34,9 +30,10 @@ class GlobalLRScaling(Callback):
                     f"Set LR and WD to {group['lr']}, {group['weight_decay']}")
 
         for scheduler in state.schedulers:
-            scheduler.base_lrs = [
-                self.lr_scale * lr for lr in scheduler.base_lrs
-            ]
+            scheduler.base_lrs = [self.lr_scale * lr for lr in scheduler.base_lrs]
+            # scheduler.base_lrs = [
+            #     self.lr_scale * lr for lr in scheduler.base_lrs
+            # ]
 
 
 class LayerFreezing(Callback):
