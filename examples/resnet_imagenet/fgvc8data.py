@@ -116,8 +116,11 @@ def build_imagenet_dataspec(
             transforms.ToTensor()
         ]
     else:
-        transform.append(transforms.CenterCrop(crop_size),
-        transforms.ToTensor())
+        # transform.append(transforms.CenterCrop(crop_size),
+        transform +=[
+            transforms.CenterCrop(crop_size),
+            transforms.ToTensor()
+        ]
 
     transform = transforms.Compose(transform)
 
